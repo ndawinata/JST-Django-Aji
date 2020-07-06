@@ -1,0 +1,102 @@
+{% load static %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h3 class="page-title">SISTEM PERINGATAN DINI BANJIR ROB MENGGUNAKAN JARINGAN SARAF TIRUAN</h3>
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Status Potensi Banjir Rob (Realtime)</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="water" class="col-sm-2 col-form-label">Water Level (m)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="water" name="water" value="{{water}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="tanggal" name="tanggal" value="{{dateNow}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="hasilRealtime" class="col-sm-2 col-form-label">Status</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="hasilRealtime" name="hasilRealtime" value="{{hasilRealtime}}">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Status Potensi Banjir Rob</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="level" class="col-sm-2 col-form-label">Water Level (m)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="level" id="level" value="{{level}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="bulan" class="col-sm-2 col-form-label">Bulan (1-12)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="bulan" id="bulan" value="{{bulan}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="hasil" class="col-sm-2 col-form-label">Status</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="hasil" name="hasil" value="{{hasil}}">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Periksa</button>
+                        </div>
+                    </form>
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Performa Sistem Saat Pelatihan</h4>
+                            <h5 class="card-subtitle">Overview of Latest Month</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <center> <img src="{% static 'assets/images/big/modelloss.jpg' %}" alt="Trulli" width="423"
+                                    height="273"> </center>
+                            <center> <img src="{% static 'assets/images/big/modelloss.jpg' %}" alt="Trulli" width="423"
+                                    height="273"> </center>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
