@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <title>JST-Banjir Rob</title>
+    <title>Prediksi Kerusakan Sensor MAWS dengan RBF dan ARIMA</title>
     <!-- Custom CSS -->
     <link href="{% static 'assets/libs/flot/css/float-chart.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -73,24 +73,115 @@
         var timelast = (jam - 1) + ":" + menit + ":" + detik;
         var tglnow = y + "-" + m + "-" + dd;
 
-        function kirimNilai(level, tgl, month) {
-            axios.get('http://localhost:8000/coba/?level=' + level + '&bulan=' + month)
+        function kirimNilaiLin(arrPressure,arrTemp,arrRh,arrWindspeed,arrWinddir,arrRain,arrWaterLevel,arrWaterTemp,arrSolRad) {
+            axios.get('http://localhost:8000/lin/?p=' + arrPressure + '&t=' + arrTemp + '&rh=' + arrRh + '&ws=' + arrWindspeed + '&wd=' + arrWinddir + '&rn=' + arrRain + '&wl=' + arrWaterLevel + '&wt=' + arrWaterTemp + '&sr=' + arrSolRad )
                 .then(function (response) {
+                    // console.log(response.data)
                     var data = response.data
-                    $("#water").val(data.level);
-                    $("#tanggal").val(tgl);
-                    $("#hasilRealtime").val(data.hasilreal);
+                    $("#vp1").html(arrPressure[arrPressure.length-1]);
+                    $("#sp1").html(data.prediksiP);
+                    $("#vt1").html(arrTemp[arrTemp.length-1]);
+                    $("#st1").html(data.prediksiT);
+                    $("#vrh1").html(arrRh[arrRh.length-1]);
+                    $("#srh1").html(data.prediksiRH);
+                    $("#vws1").html(arrWindspeed[arrWindspeed.length-1]);
+                    $("#sws1").html(data.prediksiWS);
+                    $("#vwd1").html(arrWinddir[arrWinddir.length-1]);
+                    $("#swd1").html(data.prediksiWD);
+                    $("#vrn1").html(arrRain[arrRain.length-1]);
+                    $("#srn1").html(data.prediksiRN);
+                    $("#vwl1").html(arrWaterLevel[arrWaterLevel.length-1]);
+                    $("#swl1").html(data.prediksiWL);
+                    $("#vwt1").html(arrWaterTemp[arrWaterTemp.length-1]);
+                    $("#swt1").html(data.prediksiWT);
+                    $("#vsr1").html(arrSolRad[arrSolRad.length-1]);
+                    $("#ssr1").html(data.prediksiSR);
+                    $("#time1").html(moment().format('H:mm:ss'));
+                    $("#tanggal1").html(moment().format('D MMMM YYYY'));
                 })
         }
-        
+
+        function kirimNilaiRbf(arrPressure,arrTemp,arrRh,arrWindspeed,arrWinddir,arrRain,arrWaterLevel,arrWaterTemp,arrSolRad) {
+            axios.get('http://localhost:8000/rbf/?p=' + arrPressure + '&t=' + arrTemp + '&rh=' + arrRh + '&ws=' + arrWindspeed + '&wd=' + arrWinddir + '&rn=' + arrRain + '&wl=' + arrWaterLevel + '&wt=' + arrWaterTemp + '&sr=' + arrSolRad )
+                .then(function (response) {
+                    var data = response.data
+                    $("#vp2").html(arrPressure[arrPressure.length-1]);
+                    $("#sp2").html(data.prediksiP);
+                    $("#vt2").html(arrTemp[arrTemp.length-1]);
+                    $("#st2").html(data.prediksiT);
+                    $("#vrh2").html(arrRh[arrRh.length-1]);
+                    $("#srh2").html(data.prediksiRH);
+                    $("#vws2").html(arrWindspeed[arrWindspeed.length-1]);
+                    $("#sws2").html(data.prediksiWS);
+                    $("#vwd2").html(arrWinddir[arrWinddir.length-1]);
+                    $("#swd2").html(data.prediksiWD);
+                    $("#vrn2").html(arrRain[arrRain.length-1]);
+                    $("#srn2").html(data.prediksiRN);
+                    $("#vwl2").html(arrWaterLevel[arrWaterLevel.length-1]);
+                    $("#swl2").html(data.prediksiWL);
+                    $("#vwt2").html(arrWaterTemp[arrWaterTemp.length-1]);
+                    $("#swt2").html(data.prediksiWT);
+                    $("#vsr2").html(arrSolRad[arrSolRad.length-1]);
+                    $("#ssr2").html(data.prediksiSR);
+                    $("#time2").html(moment().format('H:mm:ss'));
+                    $("#tanggal2").html(moment().format('D MMMM YYYY'));
+                })
+        }
+
         var url = 'https://cors-anywhere.herokuapp.com/http://202.90.199.132/aws-new/data/station/3000000009/' +
             tglnow + "/" + timelast + "/" + tglnow + "/" + timenow;
         axios.get(url)
             .then(function (response) {
-                var data = response.data.aaData[response.data.aaData.length - 1]
-                var waktu = moment().format('D MMMM YYYY, h:mm:ss a');
-                kirimNilai(data.waterlevel, waktu, moment().format('M'))
+                // console.log(response.data.aaData[29].windspeed)
+                
+                var arrPressure = response.data.aaData.map((val)=>{
+                    return val.pressure
+                })
+                var arrTemp = response.data.aaData.map((val)=>{
+                    return val.temp
+                })
+                var arrRh = response.data.aaData.map((val)=>{
+                    return val.rh
+                })
+                var arrWindspeed = response.data.aaData.map((val)=>{
+                    return val.windspeed
+                })
+                var arrWinddir = response.data.aaData.map((val)=>{
+                    return val.winddir
+                })
+                var arrRain = response.data.aaData.map((val)=>{
+                    return val.rain
+                })
+                var arrWaterLevel = response.data.aaData.map((val)=>{
+                    return val.waterlevel
+                })
+                var arrWaterTemp = response.data.aaData.map((val)=>{
+                    return val.watertemp
+                })
+                var arrSolRad = response.data.aaData.map((val)=>{
+                    return val.solrad
+                })
+                let batasBawah = (val) =>{
+                                if(val<=10){
+                                    return 0
+                                }else{
+                                    return val-10
+                                }
+                            }
+                let p = arrPressure.slice(batasBawah(arrPressure.length),arrPressure.length)
+                let t = arrTemp.slice(batasBawah(arrTemp.length),arrTemp.length)
+                let rh = arrRh.slice(batasBawah(arrRh.length),arrRh.length)
+                let ws = arrWindspeed.slice(batasBawah(arrWindspeed.length),arrWindspeed.length)
+                let wd = arrWinddir.slice(batasBawah(arrWinddir.length),arrWinddir.length)
+                let rn = arrRain.slice(batasBawah(arrRain.length),arrRain.length)
+                let wl = arrWaterLevel.slice(batasBawah(arrWaterLevel.length),arrWaterLevel.length)
+                let wt = arrWaterTemp.slice(batasBawah(arrWaterTemp.length),arrWaterTemp.length)
+                let sr = arrSolRad.slice(batasBawah(arrSolRad.length),arrSolRad.length)
+                // console.log(p,t,rh,ws,wd,rn,wl,wt,sr)
+                kirimNilaiLin(p,t,rh,ws,wd,rn,wl,wt,sr)
+                kirimNilaiRbf(p,t,rh,ws,wd,rn,wl,wt,sr)
             })
+        
 
         setInterval(function () {
             var url =
@@ -98,11 +189,54 @@
                 tglnow + "/" + timelast + "/" + tglnow + "/" + timenow;
             axios.get(url)
                 .then(function (response) {
-                    var data = response.data.aaData[response.data.aaData.length - 1]
-                    var waktu = moment().format('D MMMM YYYY, h:mm:ss a');
-                    kirimNilai(data.waterlevel, waktu, moment().format('M'))
+                    var arrPressure = response.data.aaData.map((val)=>{
+                    return val.pressure
                 })
-        }, 300000);
+                var arrTemp = response.data.aaData.map((val)=>{
+                    return val.temp
+                })
+                var arrRh = response.data.aaData.map((val)=>{
+                    return val.rh
+                })
+                var arrWindspeed = response.data.aaData.map((val)=>{
+                    return val.windspeed
+                })
+                var arrWinddir = response.data.aaData.map((val)=>{
+                    return val.winddir
+                })
+                var arrRain = response.data.aaData.map((val)=>{
+                    return val.rain
+                })
+                var arrWaterLevel = response.data.aaData.map((val)=>{
+                    return val.waterlevel
+                })
+                var arrWaterTemp = response.data.aaData.map((val)=>{
+                    return val.watertemp
+                })
+                var arrSolRad = response.data.aaData.map((val)=>{
+                    return val.solrad
+                })
+                let batasBawah = (val) =>{
+                                if(val<=10){
+                                    return 0
+                                }else{
+                                    return val-10
+                                }
+                            }
+                let p = arrPressure.slice(batasBawah(arrPressure.length),arrPressure.length)
+                let t = arrTemp.slice(batasBawah(arrTemp.length),arrTemp.length)
+                let rh = arrRh.slice(batasBawah(arrRh.length),arrRh.length)
+                let ws = arrWindspeed.slice(batasBawah(arrWindspeed.length),arrWindspeed.length)
+                let wd = arrWinddir.slice(batasBawah(arrWinddir.length),arrWinddir.length)
+                let rn = arrRain.slice(batasBawah(arrRain.length),arrRain.length)
+                let wl = arrWaterLevel.slice(batasBawah(arrWaterLevel.length),arrWaterLevel.length)
+                let wt = arrWaterTemp.slice(batasBawah(arrWaterTemp.length),arrWaterTemp.length)
+                let sr = arrSolRad.slice(batasBawah(arrSolRad.length),arrSolRad.length)
+                // console.log(p,t,rh,ws,wd,rn,wl,wt,sr)
+                kirimNilaiLin(p,t,rh,ws,wd,rn,wl,wt,sr)
+                kirimNilaiRbf(p,t,rh,ws,wd,rn,wl,wt,sr)
+                })
+        }, 180000);
         
     </script>
 </body>

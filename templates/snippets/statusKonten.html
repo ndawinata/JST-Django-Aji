@@ -1,0 +1,147 @@
+{% load static %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h3 class="page-title">SISTEM PREDIKSI KERUSAKAN SENSOR MAWS MENGGUNAKAN METODE ARIMA DAN RBF</h3>
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Status Potensi Kerusakan Sensor Menggunakan Regresi Linier
+                            (Realtime)</h5>
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>Pressure Sensor</b></div>
+                            <div>last value : <span id="vp1">-</span></div>
+                            <div>status : <span id="sp1">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>Temperature Sensor</b></div>
+                            <div>last value : <span id="vt1">-</span></div>
+                            <div>status : <span id="st1">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>RH Sensor</b></div>
+                            <div>last value : <span id="vrh1">-</span></div>
+                            <div>status : <span id="srh1">-</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WindSpeed Sensor</b></div>
+                            <div>last value : <span id="vws1">-</span></div>
+                            <div>status : <span id="sws1">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WindDirection Sensor</b></div>
+                            <div>last value : <span id="vwd1">-</span></div>
+                            <div>status : <span id="swd1">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>Rain Sensor</b></div>
+                            <div>last value : <span id="vrn1">-</span></div>
+                            <div>status : <span id="srn1">-</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WaterLevel Sensor</b></div>
+                            <div>last value : <span id="vwl1">-</span></div>
+                            <div>status : <span id="swl1">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WaterTemp Sensor</b></div>
+                            <div>last value : <span id="vwt1">-</span></div>
+                            <div>status : <span id="swt1">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>SolarRad Sensor</b></div>
+                            <div>last value : <span id="vsr1">-</span></div>
+                            <div>status : <span id="ssr1">-</span></div>
+                        </div>
+                    </div>
+                    <div class="text-muted">Last Update ...</div>
+                    <div class="text-muted ml-3">Date : <span id="time1">Loading</span></div>
+                    <div class="text-muted ml-3">Tanggal : <span id="tanggal1">Loading</span></div>
+                </div>
+                <div class="card-body">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Status Potensi Kerusakan Sensor Menggunakan RBF
+                            (Realtime)</h5>
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>Pressure Sensor</b></div>
+                            <div>last value : <span id="vp2">-</span></div>
+                            <div>status : <span id="sp2">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>Temperature Sensor</b></div>
+                            <div>last value : <span id="vt2">-</span></div>
+                            <div>status : <span id="st2">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>RH Sensor</b></div>
+                            <div>last value : <span id="vrh2">-</span></div>
+                            <div>status : <span id="srh2">-</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WindSpeed Sensor</b></div>
+                            <div>last value : <span id="vws2">-</span></div>
+                            <div>status : <span id="sws2">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WindDirection Sensor</b></div>
+                            <div>last value : <span id="vwd2">-</span></div>
+                            <div>status : <span id="swd2">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>Rain Sensor</b></div>
+                            <div>last value : <span id="vrn2">-</span></div>
+                            <div>status : <span id="srn2">-</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WaterLevel Sensor</b></div>
+                            <div>last value : <span id="vwl2">-</span></div>
+                            <div>status : <span id="swl2">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div><b>WaterTemp Sensor</b></div>
+                            <div>last value : <span id="vwt2">-</span></div>
+                            <div>status : <span id="swt2">-</span></div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <div class="text-white"><b>SolarRad Sensor</b></div>
+                            <div class="text-white">last value : <span id="vsr2">-</span></div>
+                            <div class="text-white">status : <span id="ssr2">-</span></div>
+                        </div>
+                    </div>
+                    <div class="text-muted">Last Update ...</div>
+                    <div class="text-muted ml-3">Date : <span id="time2">Loading</span></div>
+                    <div class="text-muted ml-3">Tanggal : <span id="tanggal2">Loading</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
